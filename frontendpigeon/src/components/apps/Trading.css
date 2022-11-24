@@ -1,0 +1,49 @@
+.buttonCSS_2 {
+    margin-top: 200px;
+    border: 1px solid blue;
+    border-radius: 5px;
+    font-weight: bolder;
+    background: rgb(255, 255, 255);
+    color: blue;
+    /* font-style: italic; */
+    padding: 4px;
+    padding-right: 5px;
+    padding-left: 8px;
+    font-size: 17px;
+   }
+   
+   .buttonCSS_2:hover {
+    background-color: blue;
+    color: white;
+    border: 1px solid  blue;
+   }
+
+   .formdim{
+    display: flex;
+    display: inline-block;
+    /* width: 100%; */
+    /* width: 200px; */
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+
+   }
+
+   .center{
+    align-items: center;
+   }
+
+   .select{
+    margin-left: 20px; 
+   }
+
+   /* .alignleft{
+    display: flex;
+
+   } */
+   .inputDeposit{
+    width: 150px;
+   }
+   .padding{
+    padding: 5px;
+   }

@@ -1,0 +1,314 @@
+.bold{
+  font-weight: bold
+}
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+.pixel_font{
+  font-family: 'VT323', monospace;
+}
+
+.fontheight8 {
+  font-size:5px;
+  width:200px;
+  height:30px;
+}
+
+.buttonClass {
+  font-size:15px;
+  font-family:Arial;
+  width:140px;
+  height:50px;
+  border-width:1px;
+  color:#14396a;
+  border-color:#333333;
+  font-weight:bold;
+  border-top-left-radius:6px;
+  border-top-right-radius:6px;
+  border-bottom-left-radius:6px;
+  border-bottom-right-radius:6px;
+  box-shadow:inset 0px 1px 0px 0px #fff6af;
+  text-shadow:inset 0px 1px 0px #ffee66;
+  background:linear-gradient(#ffec64, #ffab23);
+}
+
+.buttonClass:hover {
+  background: linear-gradient(#ffab23, #ffec64);
+}
+        
+
+.roundbutton{
+  background-color: #F8CB63;
+	color: black;
+	border: solid black;
+	transition-duration: 0.4s;
+	width: 100px;
+	height: 50px;
+	border-radius: 20px;
+	visibility: hidden;
+}
+
+.coincardchart{
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  /* margin-left: 100px; */
+}
+
+.coinDescription{
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin-left: 100px;
+  text-align: left;
+}
+
+
+.inline_block{
+  display: inline-block;
+}
+
+.savetowatchlist{
+  border-radius: 20px;
+  margin: 40px
+}
+/* .search{
+  margin-left: 170px;
+} */
+/* .searchunits{
+  margin: 5px;
+} */
+.ticker{
+  margin-top: 20px;
+}
+.tickerID{
+  width: 80px;
+  height: 20px;
+
+}
+.tickerPrice{
+  margin-top: 10px;
+}
+.topcoinBox{
+  display: inline-block;
+  width: 100px;
+  height: 150px;
+  
+}
+
+.tickerBox{
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  
+
+}
+/* .tickerButton{
+
+  border-radius: 10px;
+  transition-duration: 1s;
+} */
+.watchlistfirstRow{
+  font-size: 15px;
+}
+.watchlistbox{
+  display: flex;
+  width: 100%;
+  list-style-type: none; /* Remove bullets */
+  padding: 0; 
+  margin: 0;
+  height: 180px;
+}
+.name_size{
+  font-size: 18px;
+}
+.watchlistheader{
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.header{
+  margin-left: 10px;
+}
+.header_home{
+  margin-left: 180px;
+}
+.watchlistheader_home{
+  width: 75%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.watchlistTicker{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.margin_button{
+  margin-top: -30px;
+}
+
+
+.border{
+  border: 2px ;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+/* CSS DELETE BUTTON*/
+.button-45 {
+  align-items: center;
+  background-color: #FFE7E7;
+  background-position: 0 0;
+  border: 1px solid #FEE0E0;
+  border-radius: 11px;
+  box-sizing: border-box;
+  color: #D33A2C;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 33.4929px;
+  list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg) none;
+  padding: 2px 12px;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-underline-offset: 1px;
+  transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  word-break: break-word;
+}
+
+.button-45:active,
+.button-45:hover,
+.button-45:focus {
+  outline: 0;
+}
+
+
+.button-45:active {
+  background-color: #D33A2C;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: #FFFFFF;
+}
+
+.button-45:hover {
+  background-color: #FFE3E3;
+  border-color: #FAA4A4;
+}
+
+.button-45:active:hover,
+.button-45:focus:hover,
+.button-45:focus {
+  background-color: #D33A2C;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: #FFFFFF;
+}
+
+/* From cssbuttons.io GREEN BUTTON*/
+/* From cssbuttons.io by @AhSiber */
+.buttonCSS {
+  border: 1px solid seagreen;
+  border-radius: 5px;
+  font-weight: bolder;
+  background: rgb(255, 255, 255);
+  color: seagreen;
+  /* font-style: italic; */
+  padding: 4px;
+  padding-right: 5px;
+  padding-left: 8px;
+  font-size: 17px;
+ }
+ 
+ .buttonCSS:hover {
+  background-color: seagreen;
+  color: white;
+  border: 1px solid  seagreen;
+ }
+ /* */
+
+ .buttonCSS_1 {
+  border: 1px solid orange;
+  border-radius: 5px;
+  font-weight: bolder;
+  background: rgb(255, 255, 255);
+  color: orange;
+  /* font-style: italic; */
+  padding: 4px;
+  padding-right: 5px;
+  padding-left: 8px;
+  font-size: 17px;
+ }
+ 
+ .buttonCSS_1:hover {
+  background-color: orange;
+  color: white;
+  border: 1px solid  orange;
+ }
+ /* */
+ .buttonCSS_2 {
+  border: 1px solid blue;
+  border-radius: 5px;
+  font-weight: bolder;
+  background: rgb(255, 255, 255);
+  color: blue;
+  /* font-style: italic; */
+  padding: 4px;
+  padding-right: 5px;
+  padding-left: 8px;
+  font-size: 17px;
+ }
+ 
+ .buttonCSS_2:hover {
+  background-color: blue;
+  color: white;
+  border: 1px solid  blue;
+ }

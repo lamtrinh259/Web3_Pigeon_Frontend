@@ -1,0 +1,21 @@
+.App {
+	margin: 1rem 0rem;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.projectListwrapper {
+	margin-top: 50px;
+}
+
+.dashboardListing {
+	display: inline-block;
+	padding: 1rem;
+}
+
+.center {
+	text-align: center;
+}
+
+.padding {
+	padding: 1rem;
+}
