@@ -1,5 +1,5 @@
 import './Appshome.css';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { Contract, ethers } from "ethers";
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
@@ -24,8 +24,9 @@ function Appshome() {
   async function connectWallet() {
     window.ethereum.request({ method: "eth_requestAccounts", })
       .then((accounts) => {
-        setAccount(accounts[0])
+        setAccount(accounts)
         console.log("account", accounts)
+        console.log("isWalletInstalled", isWalletInstalled)
 
       })
       .catch((error) => { alert("Something went wrong") });
@@ -68,7 +69,7 @@ function Appshome() {
           )}
       </div>
 
-      <Outlet />
+      <Outlet context={[isWalletInstalled, setIsWalletInstalled ,account ,setAccount ]}/>
 
     </>
   );
