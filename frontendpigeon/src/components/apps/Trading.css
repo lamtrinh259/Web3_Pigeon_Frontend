@@ -50,9 +50,11 @@
 
    .addcondition{
     width: 100%;
+    border: 1px solid green;
    }
 
    .buyCondition{
     margin-top: 10px;
-    border: 1px solid blue
+    border: 1px solid blue;
+    font-weight: bold;
    }

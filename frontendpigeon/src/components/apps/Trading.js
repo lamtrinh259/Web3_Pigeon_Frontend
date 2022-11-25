@@ -14,6 +14,7 @@ function Trading() {
   const [depositAmt, setDepositAmt] = useState(null);
   const [conditionToken, setConditionToken] = useState("BTC");
   const [priceCondition, setPriceCondition] = useState(null);
+  const [conditionsFinal, setConditionsFinal] = useState([]);
   
   const [isWalletInstalled, setIsWalletInstalled, account, setAccount] = useOutletContext();
   console.log("isWalletInstalled",isWalletInstalled)
@@ -27,27 +28,6 @@ function Trading() {
     console.log(tokenTobuy)
     
   }, [tokenTobuy]);
-
-  // const createSearch = (search) => {
-  // 	const url = urlcat(BACKEND, `/api/listings/search`);
-  // 	console.log(search);
-  // 	fetch(url, {
-  // 		method: 'POST',
-  // 		headers: {
-  // 			'Content-Type': 'application/json',
-  // 		},
-  // 		body: JSON.stringify(search),
-  // 	})
-  // 		.then((response) => response.json())
-  // 		.then((data) => {
-  // 			setListings(data);
-
-  // 			if (data.error) {
-  // 				setError(data.error);
-  // 			}
-  // 		})
-  // 		.catch((error) => console.log(error));
-  // };
   // const params= [
   //   {
   //     from: '0x67b993D1dCc07b2Fce4b8d07f030477551778205',
@@ -91,7 +71,8 @@ function Trading() {
     const submitParams = {
       tokenTobuy,
       depositAmt,
-      depositToken
+      depositToken,
+      conditionsFinal
     };
     console.log("submitParams", submitParams)
 
@@ -102,17 +83,27 @@ function Trading() {
     console.log("submitParams.depositAmt",submitParams.depositAmt)
     // createSearch(submitParams);
   };
-  const addConditions =() => {
-    localStorage.setItem('items', JSON.stringify(items));
+  const addConditions =(event,) => {
+    event.preventDefault();
+    // localStorage.setItem('items', JSON.stringify(items));
+    const prev = items
+    console.log("prev",prev)
+    prev.push()
+
+    console.log("localStorage",localStorage)
   }
+  useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  }, [items]);
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
      setItems(items);
+     setConditionsFinal(items)
     }
   }, []);
 
-
+  console.log("items",items)
   const tickers = items.map((x, index) => (
 
     <div
@@ -121,7 +112,7 @@ function Trading() {
             <Tradingcondition
                 id={x.id}
                 name={x.name}
-                price={x.current_price}
+                price={x.price}
                 // img={x.image}
                 // removeTickerClick={removeTickerClick}
 

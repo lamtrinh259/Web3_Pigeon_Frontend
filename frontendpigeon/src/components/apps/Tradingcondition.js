@@ -17,7 +17,10 @@ function Tradingcondition(props){
     
     return(
     
-        
+        <>
+        {props.id}
+        {props.name}
+        {props.price}
         <table className="watchlistTicker">
 
         {/* <td><img className="inline_block" src={props.img} height="50px" ></img></td>  */}
@@ -31,10 +34,10 @@ function Tradingcondition(props){
             name={props.name} 
             /></td> */}
        
-       <button onClick={()=> props.removeTickerClick(props.name)} className="button-45" role="button" style={{fontSize : 12}}> Delete </button>
+       {/* <button onClick={()=> props.removeTickerClick(props.name)} className="button-45" role="button" style={{fontSize : 12}}> Delete </button> */}
 
         </table>
-       
+       </>
     )
 }
 
