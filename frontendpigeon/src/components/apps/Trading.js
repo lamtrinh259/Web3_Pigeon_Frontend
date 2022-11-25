@@ -3,7 +3,7 @@ import { Contract, ethers } from "ethers";
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import { useNavigate } from "react-router-dom";
-import { Link,useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import "./Trading.css"
 import Tradingcondition from "./Tradingcondition";
 
@@ -14,10 +14,10 @@ function Trading() {
   const [conditionToken, setConditionToken] = useState("BTC");
   const [priceCondition, setPriceCondition] = useState(null);
   const [conditionsFinal, setConditionsFinal] = useState([]);
-  
+
   const [isWalletInstalled, setIsWalletInstalled, account, setAccount] = useOutletContext();
-  console.log("isWalletInstalled",isWalletInstalled)
-  console.log("account",account)
+  console.log("isWalletInstalled", isWalletInstalled)
+  console.log("account", account)
 
   const [items, setItems] = useState([]);
 
@@ -25,7 +25,7 @@ function Trading() {
 
   useEffect(() => {
     console.log(tokenTobuy)
-    
+
   }, [tokenTobuy]);
   // const params= [
   //   {
@@ -38,31 +38,31 @@ function Trading() {
   //       //'0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
   //   },
   // ];
-  async function sendTX(amt){
+  async function sendTX(amt) {
     window.ethereum
-    .request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: String(account),
-          to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D', // vault deposit
-          value : ethers.utils.parseEther(`${amt}`)._hex //100000000000000decimals
-          // gasPrice: '0x09184e72a000',
-          // gas: '0x2710',
-        },
-      ],
-    })
-    .then((result) => {
-      console.log("result",result)
-      // The result varies by RPC method.
-      // For example, this method will return a transaction hash hexadecimal string on success.
-    })
-    .catch((error) => {
-      // If the request fails, the Promise will reject with an error.
-    });
+      .request({
+        method: 'eth_sendTransaction',
+        params: [
+          {
+            from: String(account),
+            to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D', // vault deposit
+            value: ethers.utils.parseEther(`${amt}`)._hex //100000000000000decimals
+            // gasPrice: '0x09184e72a000',
+            // gas: '0x2710',
+          },
+        ],
+      })
+      .then((result) => {
+        console.log("result", result)
+        // The result varies by RPC method.
+        // For example, this method will return a transaction hash hexadecimal string on success.
+      })
+      .catch((error) => {
+        // If the request fails, the Promise will reject with an error.
+      });
 
   }
-  
+
   const callSubmitFunction = (event) => {
 
     // console.log("submitting")
@@ -75,53 +75,53 @@ function Trading() {
     };
     console.log("submitParams", submitParams)
 
-    !account? alert('Please Connect Your Wallet') : sendTX(depositAmt) //in matic
-    if (submitParams.depositAmt == null){
-        alert(`Please input amount of ${depositToken}`)
+    !account ? alert('Please Connect Your Wallet') : sendTX(depositAmt) //in matic
+    if (submitParams.depositAmt == null) {
+      alert(`Please input amount of ${depositToken}`)
     }
-    console.log("submitParams.depositAmt",submitParams.depositAmt)
+    console.log("submitParams.depositAmt", submitParams.depositAmt)
     // createSearch(submitParams);
   };
-  const addConditions =(event) => {
+  const addConditions = (event) => {
     event.preventDefault();
     // localStorage.setItem('items', JSON.stringify(items));
     // const prev = items
-    items.push({conditionToken: conditionToken, priceCondition:priceCondition})
-    console.log("items",items)
+    items.push({ conditionToken: conditionToken, priceCondition: priceCondition })
+    console.log("items", items)
     setItems([...items])
-    
+
   }
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
-    console.log("localStorage",localStorage)
-    
+    console.log("localStorage", localStorage)
+
   }, [items]);
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
-     setItems(items);
-     setConditionsFinal(items)
+      setItems(items);
+      setConditionsFinal(items)
     }
   }, []);
 
-  console.log("items",items)
+  console.log("items", items)
   const tickers = items.map((x, index) => (
 
     <div
-        key={index}>
-        <div className="listbox" >
-            <Tradingcondition
-                id={x.id}
-                name={x.conditionToken}
-                price={x.priceCondition}
-                // img={x.image}
-                // removeTickerClick={removeTickerClick}
+      key={index}>
+      <div className="listbox" >
+        <Tradingcondition
+          id={x.id}
+          conditionToken={x.conditionToken}
+          priceCondition={x.priceCondition}
+        // img={x.image}
+        // removeTickerClick={removeTickerClick}
 
-            />
+        />
 
 
-        </div>
-        <hr width="850px" />
+      </div>
+      <hr width="850px" />
 
 
 
@@ -172,33 +172,33 @@ function Trading() {
                 <option value='DAI'>DAI</option>
               </select>
             </div>
-       
 
-              <div className="buyCondition" style={{ fontSize: 30 }} >I want to BUY {tokenTobuy} -
-              </div>
-              
+
+
+
           </form>
 
           <form>
-          <div style={{ fontSize: 20 }} > Add Condition:</div>
-            
+            <div style={{ fontSize: 20 }} > Add Condition:</div>
+
             <div className="addcondition">
-            
-              <label style={{ fontSize: 20}}  > WHEN </label>
+
+              <label style={{ fontSize: 20 }}  > WHEN </label>
               {/* <label className="padding"> When {conditionToken} </label> */}
               <select
                 className="select"
                 name='Which_deposit_Asset'
                 id='Which_deposit_Asset'
                 value={conditionToken}
-                onChange={(event) => conditionToken(event.target.value)}
+                onChange={(event) => setConditionToken(event.target.value)}
                 type='text'
               >
                 <option value='BTC'>BTC</option>
+                <option value='ETH'>ETH</option>
               </select>
-      
-            <label style={{ padding: 10 }} >   Price Falls below </label>
-            <input
+
+              <label style={{ padding: 10 }} >   Price Falls below </label>
+              <input
                 className="inputDeposit "
                 onChange={(event) => setPriceCondition(event.target.value)}
                 type='number'
@@ -206,29 +206,33 @@ function Trading() {
                 style={{ marginRight: 10 }}
               />
 
-            <input
-              onClick={addConditions}
-              className='searchunits'
-              type='submit'
-              value='Add Condition'
-              
-              
-            />
-          </div>
+              <input
+                onClick={addConditions}
+                className='searchunits'
+                type='submit'
+                value='Add Condition'
+
+
+              />
+            </div>
 
           </form>
-          
-        {/* <Button onClick={sendTX}> SendTx</Button> */}
+
+          {/* <Button onClick={sendTX}> SendTx</Button> */}
         </div>
+        <div className="Final_box">
+        <div className="buyCondition" style={{ fontSize: 30 }} >I want to BUY {tokenTobuy} -
+        </div>
+        {tickers}
         <form>
           <input
-              onClick={callSubmitFunction}
-              className='searchunits'
-              type='submit'
-              value='Submit Deposit Tokens and Set Trigger Conditions'
-            />
-            </form>
-            {tickers}
+            onClick={callSubmitFunction}
+            className='searchunits'
+            type='submit'
+            value='Submit Deposit Tokens and Set Trigger Conditions'
+          />
+        </form>
+        </div>
         <Link className="nav-link" to="/Apps" style={{ textDecoration: 'none' }} className="buttonCSS_2"> Back to Apps</Link>
       </div>
 
