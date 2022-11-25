@@ -57,8 +57,9 @@
     margin-top: 10px;
     border: 1px solid blue;
     font-weight: bold;
+    width: 400px;
    }
-   .name_size{
+   .ticker_size{
     font-size: 18px;
   }
 
@@ -67,5 +68,17 @@
   }
 
   .listTicker{
+    /* display: flex; */
+    width: 100%;
+    /* justify-content: space-around */
+  }
+
+  .Final_box{
     display: flex;
+    margin-top: 50px;
+    border: 2px solid pink;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: center
+
   }

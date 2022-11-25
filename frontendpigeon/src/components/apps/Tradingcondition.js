@@ -18,14 +18,10 @@ function Tradingcondition(props){
     return(
     
         <>
-        {props.name}
-        {props.price}
         <table className="listTicker">
 
         {/* <td><img className="inline_block" src={props.img} height="50px" ></img></td>  */}
-        <td className="inline_block" className="name_size" width="300px"><b>To BUY when {props.conditionToken}</b></td>
-
-        <td className="inline_block" width="300px">is below {props.priceCondition}</td>
+        <td className=" ticker_size"> when <b>{props.conditionToken}</b> is below <b>${props.priceCondition}</b></td>
         {/* <td className="inline_block" style={{color: tickerColor()}} width="100px">{props.percentchange.toFixed(2)}%</td> */}
         {/* <td className="inline_block" >
             <WatchListChart 
