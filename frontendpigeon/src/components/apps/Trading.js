@@ -8,7 +8,7 @@ import "./Trading.css"
 import Tradingcondition from "./Tradingcondition";
 
 function Trading() {
-  const [tokenTobuy, setTokenTobuy] = useState("WBTC");
+  const [tokenTobuy, setTokenTobuy] = useState("USDC");
   const [depositToken, setDepositToken] = useState("MATIC");
   const [depositAmt, setDepositAmt] = useState(null);
   const [conditionToken, setConditionToken] = useState("BTC");
@@ -74,13 +74,14 @@ function Trading() {
       conditionsFinal
     };
     console.log("submitParams", submitParams)
+    console.log("conditionsFinal", conditionsFinal)
 
     !account ? alert('Please Connect Your Wallet') : sendTX(depositAmt) //in matic
     if (submitParams.depositAmt == null) {
       alert(`Please input amount of ${depositToken}`)
-    }
-    console.log("submitParams.depositAmt", submitParams.depositAmt)
-    // createSearch(submitParams);
+    }if (!conditionsFinal.length) {alert(`Please input Conditions`)}
+    // console.log("submitParams.depositAmt", submitParams.depositAmt)
+
   };
   const addConditions = (event) => {
     event.preventDefault();
@@ -148,6 +149,7 @@ function Trading() {
             >
               <option value='WBTC'>WBTC</option>
               <option value='ETH'>ETH</option>
+              <option value='USDC'>USDC</option>
             </select>
             <div>
               <label className="padding"> Using deposit token</label>
