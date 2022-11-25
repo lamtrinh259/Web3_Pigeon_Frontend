@@ -5,15 +5,24 @@ import Badge from 'react-bootstrap/Badge';
 import { useNavigate } from "react-router-dom";
 import { Link,useOutletContext } from "react-router-dom";
 import "./Trading.css"
+import Tradingcondition from "./Tradingcondition";
 
 function Trading() {
   // const [account, setAccount] = useState("");
-  const [tokenTobuy, setTokenTobuy] = useState("ETH");
-  const [depositToken, setDepositToken] = useState("USDC");
+  const [tokenTobuy, setTokenTobuy] = useState("WBTC");
+  const [depositToken, setDepositToken] = useState("MATIC");
   const [depositAmt, setDepositAmt] = useState(null);
+  const [conditionToken, setConditionToken] = useState("BTC");
+  const [priceCondition, setPriceCondition] = useState(null);
+  
   const [isWalletInstalled, setIsWalletInstalled, account, setAccount] = useOutletContext();
   console.log("isWalletInstalled",isWalletInstalled)
   console.log("account",account)
+
+  const [items, setItems] = useState([]);
+
+
+
   useEffect(() => {
     console.log(tokenTobuy)
     
@@ -57,7 +66,7 @@ function Trading() {
       params: [
         {
           from: String(account),
-          to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D',
+          to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D', // vault deposit
           value : ethers.utils.parseEther(`${amt}`)._hex //100000000000000decimals
           // gasPrice: '0x09184e72a000',
           // gas: '0x2710',
@@ -76,6 +85,8 @@ function Trading() {
   }
   
   const callSubmitFunction = (event) => {
+
+    // console.log("submitting")
     event.preventDefault();
     const submitParams = {
       tokenTobuy,
@@ -84,13 +95,45 @@ function Trading() {
     };
     console.log("submitParams", submitParams)
 
-    !account? alert('pls connect wallet') : sendTX(depositAmt) //in matic
+    !account? alert('Please Connect Your Wallet') : sendTX(depositAmt) //in matic
     if (submitParams.depositAmt == null){
-        alert(`Pls input amount of ${depositToken}`)
+        alert(`Please input amount of ${depositToken}`)
     }
     console.log("submitParams.depositAmt",submitParams.depositAmt)
     // createSearch(submitParams);
   };
+  const addConditions =() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('items'));
+    if (items) {
+     setItems(items);
+    }
+  }, []);
+
+
+  const tickers = items.map((x, index) => (
+
+    <div
+        key={index}>
+        <div className="watchlistbox" >
+            <Tradingcondition
+                id={x.id}
+                name={x.name}
+                price={x.current_price}
+                // img={x.image}
+                // removeTickerClick={removeTickerClick}
+
+            />
+
+
+        </div>
+        <hr width="850px" />
+
+
+
+    </div>))
   return (
     <>
       <div className='container center'>
@@ -111,8 +154,8 @@ function Trading() {
               onChange={(event) => setTokenTobuy(event.target.value)}
               type='text'
             >
-              <option value='ETH'>ETH</option>
               <option value='WBTC'>WBTC</option>
+              <option value='ETH'>ETH</option>
             </select>
             <div>
               <label className="padding"> Using deposit token</label>
@@ -131,27 +174,69 @@ function Trading() {
                 onChange={(event) => setDepositToken(event.target.value)}
                 type='text'
               >
+                <option value='MATIC'>MATIC</option>
+                <option value='ETH'>ETH</option>
                 <option value='USDC'>USDC</option>
                 <option value='DAI'>DAI</option>
               </select>
             </div>
-            <div>
+       
 
-              <div className="" style={{ fontSize: 20 }} > Buy {tokenTobuy} when:
+              <div className="buyCondition" style={{ fontSize: 30 }} >I want to BUY {tokenTobuy} -
               </div>
-              <div style={{ fontSize: 30 }} > Add Condition:</div>
-            </div>
+              
+          </form>
+
+          <form>
+          <div style={{ fontSize: 20 }} > Add Condition:</div>
+            
+            <div className="addcondition">
+            
+              <label style={{ fontSize: 20}}  > WHEN </label>
+              {/* <label className="padding"> When {conditionToken} </label> */}
+              <select
+                className="select"
+                name='Which_deposit_Asset'
+                id='Which_deposit_Asset'
+                value={conditionToken}
+                onChange={(event) => conditionToken(event.target.value)}
+                type='text'
+              >
+                <option value='BTC'>BTC</option>
+              </select>
+      
+            <label style={{ padding: 10 }} >   Price Falls below </label>
             <input
+                className="inputDeposit "
+                onChange={(event) => setPriceCondition(event.target.value)}
+                type='number'
+                placeholder='indicate amount'
+                style={{ marginRight: 10 }}
+              />
+
+            <input
+              onClick={addConditions}
+              className='searchunits'
+              type='submit'
+              value='Add Condition'
+              
+              
+            />
+          </div>
+
+          </form>
+          
+        {/* <Button onClick={sendTX}> SendTx</Button> */}
+        </div>
+        <form>
+          <input
               onClick={callSubmitFunction}
               className='searchunits'
               type='submit'
-              value='Submit condition'
+              value='Submit Deposit Tokens and Set Trigger Conditions'
             />
-          </form>
-
-
-        {/* <Button onClick={sendTX}> SendTx</Button> */}
-        </div>
+            </form>
+            {tickers}
         <Link className="nav-link" to="/Apps" style={{ textDecoration: 'none' }} className="buttonCSS_2"> Back to Apps</Link>
       </div>
 

@@ -47,3 +47,12 @@
    .padding{
     padding: 5px;
    }
+
+   .addcondition{
+    width: 100%;
+   }
+
+   .buyCondition{
+    margin-top: 10px;
+    border: 1px solid blue
+   }
