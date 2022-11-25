@@ -3,17 +3,20 @@ import { Contract, ethers } from "ethers";
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import { useNavigate } from "react-router-dom";
-import { Outlet, Link } from "react-router-dom";
+import { Link,useOutletContext } from "react-router-dom";
 import "./Trading.css"
 
 function Trading() {
-  const [account, setAccount] = useState("");
+  // const [account, setAccount] = useState("");
   const [tokenTobuy, setTokenTobuy] = useState("ETH");
   const [depositToken, setDepositToken] = useState("USDC");
-  const [depositAmt, setDepositAmt] = useState("USDC");
-
+  const [depositAmt, setDepositAmt] = useState(null);
+  const [isWalletInstalled, setIsWalletInstalled, account, setAccount] = useOutletContext();
+  console.log("isWalletInstalled",isWalletInstalled)
+  console.log("account",account)
   useEffect(() => {
     console.log(tokenTobuy)
+    
   }, [tokenTobuy]);
 
   // const createSearch = (search) => {
@@ -53,9 +56,9 @@ function Trading() {
       method: 'eth_sendTransaction',
       params: [
         {
-          from: '0x67b993D1dCc07b2Fce4b8d07f030477551778205',
+          from: String(account),
           to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D',
-          value : ethers.utils.parseEther(`${amt}`)._hex //`${hexString(0.01)}`//'5af3107a4000'//100000000000000decimals
+          value : ethers.utils.parseEther(`${amt}`)._hex //100000000000000decimals
           // gasPrice: '0x09184e72a000',
           // gas: '0x2710',
         },
@@ -80,7 +83,12 @@ function Trading() {
       depositToken
     };
     console.log("submitParams", submitParams)
-    sendTX(depositAmt) //in matic
+
+    !account? alert('pls connect wallet') : sendTX(depositAmt) //in matic
+    if (submitParams.depositAmt == null){
+        alert(`Pls input amount of ${depositToken}`)
+    }
+    console.log("submitParams.depositAmt",submitParams.depositAmt)
     // createSearch(submitParams);
   };
   return (
