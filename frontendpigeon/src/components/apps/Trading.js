@@ -8,7 +8,6 @@ import "./Trading.css"
 import Tradingcondition from "./Tradingcondition";
 
 function Trading() {
-  // const [account, setAccount] = useState("");
   const [tokenTobuy, setTokenTobuy] = useState("WBTC");
   const [depositToken, setDepositToken] = useState("MATIC");
   const [depositAmt, setDepositAmt] = useState(null);
@@ -83,17 +82,19 @@ function Trading() {
     console.log("submitParams.depositAmt",submitParams.depositAmt)
     // createSearch(submitParams);
   };
-  const addConditions =(event,) => {
+  const addConditions =(event) => {
     event.preventDefault();
     // localStorage.setItem('items', JSON.stringify(items));
-    const prev = items
-    console.log("prev",prev)
-    prev.push()
-
-    console.log("localStorage",localStorage)
+    // const prev = items
+    items.push({conditionToken: conditionToken, priceCondition:priceCondition})
+    console.log("items",items)
+    setItems([...items])
+    
   }
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
+    console.log("localStorage",localStorage)
+    
   }, [items]);
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
@@ -108,11 +109,11 @@ function Trading() {
 
     <div
         key={index}>
-        <div className="watchlistbox" >
+        <div className="listbox" >
             <Tradingcondition
                 id={x.id}
-                name={x.name}
-                price={x.price}
+                name={x.conditionToken}
+                price={x.priceCondition}
                 // img={x.image}
                 // removeTickerClick={removeTickerClick}
 

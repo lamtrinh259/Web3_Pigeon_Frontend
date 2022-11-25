@@ -58,3 +58,14 @@
     border: 1px solid blue;
     font-weight: bold;
    }
+   .name_size{
+    font-size: 18px;
+  }
+
+  .inline_block{
+    display: inline-block;
+  }
+
+  .listTicker{
+    display: flex;
+  }

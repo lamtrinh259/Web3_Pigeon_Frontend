@@ -18,15 +18,14 @@ function Tradingcondition(props){
     return(
     
         <>
-        {props.id}
         {props.name}
         {props.price}
-        <table className="watchlistTicker">
+        <table className="listTicker">
 
         {/* <td><img className="inline_block" src={props.img} height="50px" ></img></td>  */}
-        <td className="inline_block" className="name_size" width="100px"><b>{props.name}</b></td>
+        <td className="inline_block" className="name_size" width="100px"><b>{props.conditionToken}</b></td>
 
-        <td className="inline_block" width="100px">${props.price.toFixed(3)}</td>
+        <td className="inline_block" width="100px">{props.priceCondition}</td>
         {/* <td className="inline_block" style={{color: tickerColor()}} width="100px">{props.percentchange.toFixed(2)}%</td> */}
         {/* <td className="inline_block" >
             <WatchListChart 
