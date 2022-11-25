@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { Link, useOutletContext } from "react-router-dom";
 import "./Trading.css"
 import Tradingcondition from "./Tradingcondition";
+import abi from './abi'
+
 
 function Trading() {
   const [tokenTobuy, setTokenTobuy] = useState("USDC");
@@ -25,30 +27,31 @@ function Trading() {
 
   useEffect(() => {
     console.log(tokenTobuy)
-
+    // console.log("abi",abi)
   }, [tokenTobuy]);
-  // const params= [
-  //   {
-  //     from: '0x67b993D1dCc07b2Fce4b8d07f030477551778205',
-  //     to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D',
-  //     gas: '28a0', // 30400
-  //     gasPrice: '',//'0x9184e72a000', // 10000000000000
-  //     value: 'a1ea',//'277cf2a', // 41406250 //2441406250
-  //     data: '' //'0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
-  //       //'0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
-  //   },
-  // ];
+
+////
+  const pathAddresses = ["0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889","0xE097d6B3100777DC31B34dC2c58fB524C2e76921"]
+  const interfaceVault = new ethers.utils.Interface(abi);
+  // const dataOutput = interfaceVault.encodeFunctionData("createRule", [ethers.utils.parseEther(`${depositAmt}`), ethers.utils.parseEther(`${priceCondition}`), true, 0,1,0,0,pathAddresses, 0,0,true ])
+  // console.log("dataOutput",dataOutput)
+///
   async function sendTX(amt) {
+
+    const dataOutput = interfaceVault.encodeFunctionData("createRule", [[ethers.utils.parseEther(`${depositAmt}`), ethers.utils.parseEther(`${priceCondition}`), true, 0,1,0,0,pathAddresses, 0,0,true ]])
+    console.log('dataOutput',dataOutput)
+
     window.ethereum
       .request({
         method: 'eth_sendTransaction',
         params: [
           {
             from: String(account),
-            to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D', // vault deposit
-            value: ethers.utils.parseEther(`${amt}`)._hex //100000000000000decimals
+            to: '0x2F7Fca891180ee240732d6770B5660F534458569', // vault deposit
+            value: 0,//ethers.utils.parseEther(`${amt}`)._hex, //100000000000000decimals
             // gasPrice: '0x09184e72a000',
             // gas: '0x2710',
+            data: dataOutput
           },
         ],
       })
@@ -79,7 +82,7 @@ function Trading() {
     !account ? alert('Please Connect Your Wallet') : sendTX(depositAmt) //in matic
     if (submitParams.depositAmt == null) {
       alert(`Please input amount of ${depositToken}`)
-    }if (!conditionsFinal.length) {alert(`Please input Conditions`)}
+    } if (!conditionsFinal.length) { alert(`Please input Conditions`) }
     // console.log("submitParams.depositAmt", submitParams.depositAmt)
 
   };
@@ -129,57 +132,12 @@ function Trading() {
     </div>))
   return (
     <>
-      <div className='container center'>
+      <div className='container center' >
         <br />
 
         <div className="container padding">
           <h1>TRADING</h1>
           <h3 style={{ fontSize: 25 }}> Execute advanced trades based on predefined conditions</h3>
-
-          <form className="formdim">
-            <label> Which tokens do you want to buy?</label>
-
-            <select
-              className="select"
-              name='Which_Asset'
-              id='Which_Asset'
-              value={tokenTobuy}
-              onChange={(event) => setTokenTobuy(event.target.value)}
-              type='text'
-            >
-              <option value='WBTC'>WBTC</option>
-              <option value='ETH'>ETH</option>
-              <option value='USDC'>USDC</option>
-            </select>
-            <div>
-              <label className="padding"> Using deposit token</label>
-              <input
-                className="inputDeposit "
-                onChange={(event) => setDepositAmt(event.target.value)}
-                type='number'
-                placeholder='indicate amount'
-              />
-
-              <select
-                className="select"
-                name='Which_deposit_Asset'
-                id='Which_deposit_Asset'
-                value={depositToken}
-                onChange={(event) => setDepositToken(event.target.value)}
-                type='text'
-              >
-                <option value='MATIC'>MATIC</option>
-                <option value='ETH'>ETH</option>
-                <option value='USDC'>USDC</option>
-                <option value='DAI'>DAI</option>
-              </select>
-            </div>
-
-
-
-
-          </form>
-
           <form>
             <div style={{ fontSize: 20 }} > Add Condition:</div>
 
@@ -219,21 +177,69 @@ function Trading() {
             </div>
 
           </form>
+          <form className="formdim">
+
+          <label className="padding"> Using deposit token</label>
+              <input
+                className="inputDeposit "
+                onChange={(event) => setDepositAmt(event.target.value)}
+                type='number'
+                placeholder='indicate amount'
+              />
+
+              <select
+                className="select"
+                name='Which_deposit_Asset'
+                id='Which_deposit_Asset'
+                value={depositToken}
+                onChange={(event) => setDepositToken(event.target.value)}
+                type='text'
+              >
+                <option value='MATIC'>MATIC</option>
+                <option value='ETH'>ETH</option>
+                <option value='USDC'>USDC</option>
+                <option value='DAI'>DAI</option>
+              </select>
+              <div>
+            <label> Which tokens do you want to buy?</label>
+
+            <select
+              className="select"
+              name='Which_Asset'
+              id='Which_Asset'
+              value={tokenTobuy}
+              onChange={(event) => setTokenTobuy(event.target.value)}
+              type='text'
+            >
+              <option value='WBTC'>WBTC</option>
+              <option value='ETH'>ETH</option>
+              <option value='USDC'>USDC</option>
+            </select>
+
+              
+            </div>
+
+
+
+
+          </form>
+
+
 
           {/* <Button onClick={sendTX}> SendTx</Button> */}
         </div>
         <div className="Final_box">
-        <div className="buyCondition" style={{ fontSize: 30 }} >I want to BUY {tokenTobuy} -
-        </div>
-        {tickers}
-        <form>
-          <input
-            onClick={callSubmitFunction}
-            className='searchunits'
-            type='submit'
-            value='Submit Deposit Tokens and Set Trigger Conditions'
-          />
-        </form>
+          <div className="buyCondition" style={{ fontSize: 30 }} >I want to BUY {tokenTobuy} -
+          </div>
+          {tickers}
+          <form>
+            <input
+              onClick={callSubmitFunction}
+              className='searchunits'
+              type='submit'
+              value='Submit Deposit Tokens and Set Trigger Conditions'
+            />
+          </form>
         </div>
         <Link className="nav-link" to="/Apps" style={{ textDecoration: 'none' }} className="buttonCSS_2"> Back to Apps</Link>
       </div>

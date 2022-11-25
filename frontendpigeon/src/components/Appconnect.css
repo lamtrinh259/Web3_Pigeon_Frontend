@@ -2,7 +2,9 @@
 	margin: 1rem 0rem;
 	font-family: Arial, Helvetica, sans-serif;
 }
-
+.backgroundimg{
+	color: #000312;
+}
 .projectListwrapper {
 	margin-top: 50px;
 }
