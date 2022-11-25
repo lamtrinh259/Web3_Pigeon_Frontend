@@ -36,7 +36,52 @@ function Trading() {
   // 		})
   // 		.catch((error) => console.log(error));
   // };
+  const params= [
+    {
+      from: '0x67b993D1dCc07b2Fce4b8d07f030477551778205',
+      to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D',
+      gas: '28a0', // 30400
+      gasPrice: '',//'0x9184e72a000', // 10000000000000
+      value: 'a1ea',//'277cf2a', // 41406250 //2441406250
+      data: '' //'0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
+        //'0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+    },
+  ];
+  const transactionParameters = {
+    nonce: '0x00', // ignored by MetaMask
+    gasPrice: '0x09184e72a000', // customizable by user during MetaMask confirmation.
+    gas: '0x2710', // customizable by user during MetaMask confirmation.
+    to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D', // Required except during contract publications.
+    from: '0x67b993D1dCc07b2Fce4b8d07f030477551778205', // must match user's active address.
+    value: 'a1ea',//'0x00', // Only required to send ether to the recipient from the initiating external account.
+    //data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
+    //chainId: '13881',//80001 // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
+  };
+  async function sendTX(){
+    window.ethereum
+    .request({
+      method: 'eth_sendTransaction',
+      params: [
+        {
+          from: '0x67b993D1dCc07b2Fce4b8d07f030477551778205',
+          to: '0xf2081863a9042ACdBF6D6D90B7b6d1a0a1CCef0D',
+          value: '5af3107a4000'//100000000000000decimals
+          // gasPrice: '0x09184e72a000',
+          // gas: '0x2710',
+        },
+      ],
+    })
+    .then((result) => {
+      console.log("result",result)
+      // The result varies by RPC method.
+      // For example, this method will return a transaction hash hexadecimal string on success.
+    })
+    .catch((error) => {
+      // If the request fails, the Promise will reject with an error.
+    });
 
+  }
+  
   const callSubmitFunction = (event) => {
     event.preventDefault();
     const submitParams = {
@@ -107,7 +152,7 @@ function Trading() {
           </form>
 
 
-
+        <Button onClick={sendTX}> SendTx</Button>
         </div>
         <Link className="nav-link" to="/Apps" style={{ textDecoration: 'none' }} className="buttonCSS_2"> Back to Apps</Link>
       </div>

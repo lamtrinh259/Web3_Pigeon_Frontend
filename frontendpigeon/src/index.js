@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 // import './index.css';
 // import App from './App';
 import Appconnect from './components/Appconnect'
-import { Dapp } from './components/Dapp';
 import Appshome from "./components/Appshome";
 import Appsindex from './components/Appsindex';
 import Trading from './components/apps/Trading';
@@ -15,14 +14,15 @@ import {
 
 // We import bootstrap here, but you can remove if you want
 import "bootstrap/dist/css/bootstrap.css";
+import TestBlocknative from './components/TestBlocknative';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
   <BrowserRouter>
     <Routes>
       <Route path="/" element={  <Appconnect />}>
-      {/* <Route path="/" element={  <Dapp />}> */}
+      {/* <Route path="/" element={  <TestBlocknative />}> */}
+
         </Route>
       <Route path="/Apps" element={  <Appshome />}>
         {/* *nested under app */}
