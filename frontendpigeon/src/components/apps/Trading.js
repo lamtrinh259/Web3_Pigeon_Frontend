@@ -150,7 +150,7 @@ function Trading() {
           </form>
 
 
-        <Button onClick={sendTX}> SendTx</Button>
+        {/* <Button onClick={sendTX}> SendTx</Button> */}
         </div>
         <Link className="nav-link" to="/Apps" style={{ textDecoration: 'none' }} className="buttonCSS_2"> Back to Apps</Link>
       </div>
