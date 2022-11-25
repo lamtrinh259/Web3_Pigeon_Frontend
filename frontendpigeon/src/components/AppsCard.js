@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import { useNavigate } from "react-router-dom";
-// import ParticipateProject from './ParticipateProject';
+import "./Appscard.css"
 
 
 export default function AppsCard(props) {
@@ -16,14 +16,18 @@ export default function AppsCard(props) {
 
     return (
         <>  
-            <div className='dashboardListing' >
-                <Card onClick={navigate_App} style={{ width: '20rem', borderRadius: '2rem' }}>
+            <div className='dashboardListing'>
+            {/* <img src={props.img} alt=""/> */}
+                <Card onClick={navigate_App} style={{ width: '15rem', borderRadius: '2rem', backgroundColor: '#000312' }} >
+                
+                <Card.Img  src={props.img}  alt="Card image" />
+                    <Card.ImgOverlay>
                     {/* <Card.Img src="https://picsum.photos/seed/picsum/400/300" alt="Card image" /> */}
                     {/* <Card.ImgOverlay> */}
-
+                    <Card.ImgOverlay src={props.img}  />
                     <Card.Body>
-                        <Card.Title>{props.Title}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Subtitle</Card.Subtitle>
+                        {/* <Card.Title>{props.Title}</Card.Title> */}
+                        {/* <Card.Subtitle className="mb-2 text-muted margintop10">{props.subtitle}</Card.Subtitle> */}
                         <Card.Text>
                             <Badge pill bg="dark">
                                 {/* {x.maxAmt} ETH */}
@@ -31,7 +35,7 @@ export default function AppsCard(props) {
                         </Card.Text>
                         {/* <Button onClick={() => { setModal(x) }}>Participate</Button> */}
                     </Card.Body>
-                    {/* </Card.ImgOverlay> */}
+                    </Card.ImgOverlay>
                 </Card>
             </div>
 

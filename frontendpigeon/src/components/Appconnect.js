@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <div className='container center'>
+      <div className='container center backgroundimg' >
         <br />
             <Button onClick={launchApp}>Launch App</Button>
 

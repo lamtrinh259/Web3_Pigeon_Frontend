@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-// import image from './llama_cropped.png'
+import GMimage from "./../assets/GM.png"
 
 
 function Appshome() {
